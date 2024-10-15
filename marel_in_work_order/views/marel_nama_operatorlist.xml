@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="view_marel_nama_operatorlist_tree" model="ir.ui.view">
+            <field name="name">marel.nama.operatorlist.tree</field>
+            <field name="model">marel.nama.operatorlist</field>
+            <field name="arch" type="xml">
+                <list string="Pendataan Helper">
+                    <field name="status" readonly="1"/>
+                    <field name="tgl_kerja" readonly="1"/>
+                    <field name="no_kkp" required="1"/>
+                    <field name="nama_operator_id" required="1"/>
+                    <field name="nama_qiusi_id" required="1"/>
+                    <field name="workcenter_id" required="1"/>
+                    <!-- <field name="no_mesin_id" options="{'no_create': True}" attrs="{'column_invisible':[('parent.workcenter_id', 'in', [8])]}" required="1"/> -->
+                    <field name="shift" required="1"/>
+                    <!-- <field name="krono_kk_menit"/>
+                    <field name="target_knitting"/>
+                    <field name="target_conti"/>
+                    <field name="target_as" />
+                    <field name="target_sewing"/>
+                    <field name="target_bordir"/>
+                    <field name="target_setting"/> -->
+                </list>
+            </field>
+        </record>
+
+        <!-- pivot -->
+        <!-- <record model="ir.ui.view" id="view_marel_nama_operatorlist_pivot">
+            <field name="name">marel.nama.operatorlist.pivot</field>
+            <field name="model">marel.nama.operatorlist</field>
+            <field name="arch" type="xml">
+                <pivot string="Data Pendataan Helper">
+                    <field name="target_knitting" type="measure"/>
+                    <field name="gread_d" type="measure"/>
+                    <field name="putus_benang" type="measure"/>
+                    <field name="bolong" type="measure"/>
+                    <field name="vanise" type="measure"/>
+                    <field name="singker" type="measure"/>
+                    <field name="kotor" type="measure"/>
+                    <field name="terry" type="measure"/>
+                    <field name="jumpstich" type="measure"/>
+                    <field name="renggang" type="measure"/>
+                    <field name="tidak_loading" type="measure"/>
+                    <field name="belang" type="measure"/>
+                    <field name="ukuran" type="measure"/>
+                    <field name="jarum" type="measure"/>
+                    <field name="transfer_jebol" type="measure"/>
+                    <field name="tgl_kerja" type="row"/>
+                </pivot>
+            </field>
+        </record> -->
+        <!-- graph -->
+        <!-- <record model="ir.ui.view" id="view_marel_nama_operatorlist_graph">
+            <field name="name">marel.nama.operatorlist.graph</field>
+            <field name="model">marel.nama.operatorlist</field>
+            <field name="arch" type="xml">
+                <graph string="Data Pendataan Helper">
+                    <field name="krono_kk_menit" type="measure"/>
+                    <field name="jumlah_yg_selesai" type="measure"/>
+                    <field name="jumlah_reject" type="measure"/>
+                    <field name="target_knitting" type="measure"/>
+                </graph>
+            </field>
+        </record> -->
+
+        <record id="view_marel_nama_operatorlist_form" model="ir.ui.view">
+            <field name="name">marel.nama.operatorlist.form</field>
+            <field name="model">marel.nama.operatorlist</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Data Pendataan Helper">
+                    <sheet>
+                        <group>
+                            <field name="status" readonly="1"/>
+                            <field name="tgl_kerja" readonly="1"/>
+                            <field name="no_kkp" required="1"/>
+                            <field name="nama_operator_id" required="1"/>
+                            <field name="nama_qiusi_id" required="1"/>
+                            <field name="workcenter_id" required="1"/>
+                            <!-- <field name="no_mesin_id" options="{'no_create': True}" attrs="{'column_invisible':[('parent.workcenter_id', 'in', [8])]}" required="1"/> -->
+                            <field name="shift" required="1"/>
+                            <field name="krono_kk_menit"/>
+                            <field name="target_knitting"/>
+                            <field name="target_conti"/>
+                            <field name="target_as" />
+                            <field name="target_sewing"/>
+                            <field name="target_bordir"/>
+                            <field name="target_setting"/>
+                            <field name="jumlah_reject" readonly="1" />
+                        </group>
+                        <notebook>
+                            <page string="Operator Rijek Kaoskaki">
+                                <field name="operator_rijek_kaoskaki_ids">
+                                    <tree string="Jenis Rijek Kaoskaki">
+                                        <field name="jenis_rijek_kaoskaki_id" widget="selection"/>
+                                        <field name="jumlah_rjk"/>
+                                        <field name="keterangan"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_marel_nama_operatorlist_filter" model="ir.ui.view">
+            <field name="name">marel.nama.operatorlist.filter</field>
+            <field name="model">marel.nama.operatorlist</field>
+            <field name="arch" type="xml">
+                <search string="Produksi Harian">
+                    <field name="tgl_kerja"/>
+                    <filter string="Today" name="today" domain="[('tgl_kerja','&lt;=', (datetime.date.today()).strftime('%Y-%m-%d')),('tgl_kerja','&gt;=',(datetime.date.today()).strftime('%Y-%m-%d'))]" help="Today or scheduled for today"/>
+                    <filter string="Yesterday" name="yesterday" domain="[('tgl_kerja','&gt;=', ((context_today()+datetime.timedelta(days=-1)).strftime('%Y-%m-%d'))), ('tgl_kerja','&lt;=', ((context_today()+datetime.timedelta(days=-1)).strftime('%Y-%m-%d')))]" help="Yesterday"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_operator_rijek_kaoskaki_form" model="ir.ui.view">
+            <field name="name">operator.rijek.kaoskaki.form</field>
+            <field name="model">operator.rijek.kaoskaki</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Operator Rijek Kaoskaki">
+                    <sheet>
+                        <group>
+                            <field name="jenis_rijek_kaoskaki_id"/>
+                            <field name="jumlah_rjk"/>
+                            <field name="keterangan"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_operator_rijek_kaoskaki_tree" model="ir.ui.view">
+            <field name="name">operator.rijek.kaoskaki.tree</field>
+            <field name="model">operator.rijek.kaoskaki</field>
+            <field name="arch" type="xml">
+                <tree string="Rijek Kaoskaki">
+                    <field name="jenis_rijek_kaoskaki_id"/>
+                    <field name="jumlah_rjk"/>
+                    <field name="keterangan"/>
+                </tree>
+            </field>
+        </record>
+        <!-- Jenis Rijek Kaoskaki -->
+        <record id="view_jenis_rijek_kaoskaki_form" model="ir.ui.view">
+            <field name="name">jenis.rijek.kaoskaki.form</field>
+            <field name="model">jenis.rijek.kaoskaki</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Jenis Rijek Kaoskaki">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                                <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                            </button>
+                        </div>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_jenis_rijek_kaoskaki_tree" model="ir.ui.view">
+            <field name="name">jenis.rijek.kaoskaki.tree</field>
+            <field name="model">jenis.rijek.kaoskaki</field>
+            <field name="arch" type="xml">
+                <tree string="Jenis Rijek Kaoskaki">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

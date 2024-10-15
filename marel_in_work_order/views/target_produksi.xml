@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="view_target_produksi_form" model="ir.ui.view">
+            <field name="name">target.produksi.form</field>
+            <field name="model">target.produksi</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="target produksi">
+                    <sheet>
+                        <group>
+                            <field name="target"/>
+                            <field name="target_knitting"/>
+                            <field name="target_conti"/>
+                            <field name="target_sewing"/>
+                            <field name="target_as"/>
+                            <field name="target_setting"/>
+                            <field name="target_bordir"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_target_produksi_tree" model="ir.ui.view">
+            <field name="name">target.produksi.tree</field>
+            <field name="model">target.produksi</field>
+            <field name="arch" type="xml">
+                <list string="target produksi">
+                    <field name="target"/>
+                    <field name="target_knitting"/>
+                    <field name="target_conti"/>
+                    <field name="target_sewing"/>
+                    <field name="target_as"/>
+                    <field name="target_setting"/>
+                    <field name="target_bordir"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="action_target_produksi_window" model="ir.actions.act_window">
+            <field name="type">ir.actions.act_window</field>
+            <field name="name">Target Produksi</field>
+            <field name="res_model">target.produksi</field>
+            <!-- <field name="context">{'search_default_today':1}</field> -->
+            <field name="view_mode">list,form,pivot,graph</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+					Click to add target produksi
+                </p>
+            </field>
+        </record>
+
+        <menuitem 
+            id="menu_target_produksi" 
+            name="Setting Target Produksi" 
+            parent="mrp.menu_mrp_configuration" 
+            action="action_target_produksi_window" 
+            sequence="250"
+        />
+
+    </data>
+</odoo>

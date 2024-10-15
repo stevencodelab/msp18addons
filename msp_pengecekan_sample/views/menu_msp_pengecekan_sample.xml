@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="action_pengecekan_sample" model="ir.actions.act_window">
+            <field name="name">Pengecekan Sample</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">pengecekan.sample</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem 
+        id="msp_pengecekan_sample" 
+        name="Pengecekan Sample " 
+        web_icon="msp_pengecekan_sample,static/description/icon.png"
+        sequence="100" action="action_pengecekan_sample"/>
+    </data>
+</odoo>

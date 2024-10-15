@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Pengecekan Sample Tree -->
+    <record model="ir.ui.view" id="view_pengecekan_sample_tree">
+        <field name="name">pengecekan.sample.tree</field>
+        <field name="model">pengecekan.sample</field>
+        <field name="arch" type="xml">
+            <list string="Pengecekan lines">
+                <field name="name"/>
+                <field name="tgl_mulai"/>
+                <field name="manufacturing_order"/>
+                <field name="product_id"/>
+                <field name="tgl_selesai"/>
+                <field name="success_header"/>
+            </list>
+        </field>
+    </record>
+                            
+    <!-- Form View Untuk PengecekanSample -->
+    <record model="ir.ui.view" id="view_pengecekan_sample_form">
+        <field name="name">pengecekan.sample.form</field>
+        <field name="model">pengecekan.sample</field>
+        <field name="arch" type="xml">
+            <form string="Pengecekan Header">
+                <header>
+                    <button name="action_approve" string="Approve" type="object" class="btn-success"/>
+                    <button name="action_cancel" string="Batal" type="object" class="btn-danger"/>
+                    <button name="action_draft" string="Set To Draft" type="object" class="btn-dark"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,waiting,success,canceled" statusbar_colors='{"success": "blue","canceled": "red"}' />
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                    <h4>
+                        <field name="name" required="1"/>
+                    </h4>  
+                    </div>
+                    <group name="main_grp_1" colspan="2">
+                        <group>
+                            <field name="manufacturing_order" domain="[('state', 'not in', ['done','cancel'])]"/>
+                            <field name="product_id" readonly="1"/>
+                            <field name="marel_sample_id"/>
+                            <field name="style" readonly="1"/>
+                            <field name="warna" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="tgl_mulai"/>
+                            <field name="keterangan"/>
+                        </group>
+                    </group>    
+                        <group>
+                            <group name="standart_stretch" string="Standart Stretch">
+                                <table class="table table-condensed table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="2" style="background-color:#3498DB; color:#FFF;">Stretch Gum</th>
+                                                <th colspan="2" style="background-color:#3498DB; color:#FFF;">Stretch Leg</th>
+                                                <th colspan="2" style="background-color:#3498DB; color:#FFF;">Leg Gum</th>
+                                                <th colspan="2" style="background-color:#3498DB; color:#FFF;">Leg Gum Bawah</th>
+                                                <th colspan="2" style="background-color:#3498DB; color:#FFF;">Stretch Foot</th>
+                                                <th colspan="2" style="background-color:#3498DB; color:#FFF;">Foot Gum</th>
+                                            </tr>
+                                            <tr>
+                                                <th>X</th>
+                                                <th>Y</th>
+                                                <th>X</th>
+                                                <th>Y</th>
+                                                <th>X</th>
+                                                <th>Y</th>
+                                                <th>X</th>
+                                                <th>Y</th>
+                                                <th>X</th>
+                                                <th>Y</th>
+                                                <th>X</th>
+                                                <th>Y</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><field name="gum_relaxed_x" readonly="1"/></td>
+                                                <td><field name="gum_relaxed_y" readonly="1"/></td>
+                                                <td><field name="leg_relaxed_x" readonly="1"/></td>
+                                                <td><field name="leg_relaxed_y" readonly="1"/></td>
+                                                <td><field name="leg_gum_relaxed_x" readonly="1"/></td>
+                                                <td><field name="leg_gum_relaxed_y" readonly="1"/></td>
+                                                <td><field name="leg_gum_bawah_relaxed_x" readonly="1"/></td>
+                                                <td><field name="leg_gum_bawah_relaxed_y" readonly="1"/></td>
+                                                <td><field name="foot_relaxed_x" readonly="1"/></td>
+                                                <td><field name="foot_relaxed_y" readonly="1"/></td>
+                                                <td><field name="foot_gum_relaxed_x" readonly="1"/></td>
+                                                <td><field name="foot_gum_relaxed_y" readonly="1"/></td>
+                                            </tr>
+                                        </tbody>
+                                </table>
+                            </group>
+                                                    
+                        </group>
+                        
+                    <notebook>
+                        <page string="Pengecekan Sample">
+                            <field name="pengecekan_sample_line" mode="tree,kanban">
+                                <list string="Pengecekan Sample" editable="bottom">
+                                    <field name="tgl_buat"/>
+                                    <field name="no_mesin"/>
+                                    <field name="temuan"/>
+                                    <field name="keterangan"/>
+                                    <field name="stretch_gum_x"/>
+                                    <field name="stretch_gum_y"/>
+                                    <field name="stretch_leg_x"/>
+                                    <field name="stretch_leg_y"/>
+                                    <field name="stretch_leg_gum_x"/>
+                                    <field name="stretch_leg_gum_y"/>
+                                    <field name="stretch_leg_gum_bawah_x"/>
+                                    <field name="stretch_leg_gum_bawah_y"/>
+                                    <field name="stretch_foot_x"/>
+                                    <field name="stretch_foot_y"/>
+                                    <field name="stretch_foot_gum_x"/>
+                                    <field name="stretch_foot_gum_y"/>
+                                    <field name="nama_operator_id"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Other Information">
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <!-- View for PengecekanSampleLine -->
+    <record model="ir.ui.view" id="view_pengecekan_sample_line_form">
+        <field name="name">pengecekan.sample.line.form</field>
+        <field name="model">pengecekan.sample.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="tgl_buat"/>
+                        <field name="no_mesin"/>
+                        <field name="temuan"/>
+                        <field name="stretch_gum_x"/>
+                        <field name="stretch_gum_y"/>
+                        <field name="stretch_leg_x"/>
+                        <field name="stretch_leg_y"/>
+                        <field name="stretch_leg_gum_x"/>
+                        <field name="stretch_leg_gum_y"/>
+                        <field name="stretch_leg_gum_bawah_x"/>
+                        <field name="stretch_leg_gum_bawah_y"/>
+                        <field name="stretch_foot_x"/>
+                        <field name="stretch_foot_y"/>
+                        <field name="stretch_foot_gum_x"/>
+                        <field name="stretch_foot_gum_y"/>
+                        <field name="nama_operator_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="view_mrp_workorder_form_2" model="ir.ui.view">
+            <field name="name">mrp_workorder_form_2</field>
+            <field name="model">mrp.workorder</field>
+            <field name="inherit_id" ref="mrp_workorder.mrp_workorder_view_form_tablet"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="marel_nama_operatorlist_ids" attrs="{'readonly': [('allow_producing_quantity_change', '=', False)]}">
+                        <list string="Data Perbagian">
+                            <field name="tgl_kerja"/>
+                            <field name="no_kkp" />
+                            <field name="nama_operator_id" options="{'no_create': True}" required="1" widget="selection"/>
+                            <field name="nama_qiusi_id" options="{'no_create': True}"  widget="selection"/>
+                            <field name="shift" />
+                            <!-- <field name="no_box" /> -->
+                            <!-- <field name="krono_kk_menit" />
+                            <field name="jam_kerja" />
+                            <field name="target_knitting"/>
+                            <field name="target_conti"/>
+                            <field name="target_as" />
+                            <field name="target_sewing"/>
+                            <field name="target_bordir"/>
+                            <field name="target_setting"/> -->
+                        </list>
+                    </field>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
